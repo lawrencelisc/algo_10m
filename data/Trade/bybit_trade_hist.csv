@@ -1,0 +1,2 @@
+date,name,symbol,saved_csv,signal,order_id,t_timestamp,t_datetime,t_type,side,takerOrMaker,price,amount,cost,product_symbol,feeCurrency,fee.cost,fee.rate
+2025-12-11 18:00:00,201_market_price_usd_ohlc,BTC,201_market_price_usd_ohlc_c_BTC.csv,1,5c98e096-5ae2-47fc-9147-928b604cf642,1765476793433,2025-12-11T18:13:13.433Z,market,buy,taker,90345.0,0.001,90.345,BTCUSDT,USDT,0.04968975,0.00055

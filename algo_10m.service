@@ -1,0 +1,14 @@
+[Unit]
+Description=project_1
+
+[Service]
+Type=simple
+WorkingDirectory=/usr/local/app/algo_10m
+ExecStart=/usr/local/app/algo_10m/venv/bin/python3.11 main_entry.py
+StandardOutput=syslog
+Restart=always
+RestartSec=2
+User=root
+
+[Install]
+WantedBy=multi-user.target
