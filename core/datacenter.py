@@ -18,7 +18,7 @@ from core.orchestrator import DataSourceConfig
 class DataCenterSrv:
     warnings.filterwarnings("ignore", category=FutureWarning, module="pandas")
     dict_output_key = 'o'
-    data_folder_GN = Path('..') / 'data' / 'GrassNodeData'
+    data_folder_GN = Path(__file__).parent.parent / 'data' / 'GrassNodeData'
 
 
     def __init__(self, strat_df: pd.DataFrame):

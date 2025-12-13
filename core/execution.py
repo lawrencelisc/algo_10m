@@ -16,8 +16,8 @@ from utils.tg_wrapper import SendTGBot
 
 class SignalExecution:
     # constant
-    strat_folder = Path('..') / 'data' / 'StratData'
-    signal_folder = Path('..') / 'data' / 'Signal'
+    strat_folder = Path(__file__).parent.parent / 'data' / 'StratData'
+    signal_folder = Path(__file__).parent.parent / 'data' / 'Signal'
     prev_signal_filename = 'prev_signal_table.csv'
     signal_filename = 'signal_table.csv'
     signal_plus_filename = 'signal_table_plus.csv'
@@ -48,18 +48,20 @@ class SignalExecution:
             actual_bid = round(float(bid_df[symbol] * signal_sum), 5)
             pos_status = self.get_pos_status(symbol)
             actual_pos: float = pos_status['pos_size']
-            abs_actual_pos: float = actual_pos
+            # abs_actual_pos: float = actual_pos
             side = pos_status['side']
 
             if (side == 'Sell'): actual_pos = actual_pos * -1
 
-            if (actual_bid != abs_actual_pos):
+            if (actual_bid != actual_pos):
                 corr = round((actual_pos - actual_bid), 5)
                 adj = -1 * corr
                 adj_value = abs(adj)
                 if (adj > 0):
+                    print('>>>>>>>>>>>>>>>>>>>>> trade.long ', adj_value)
                     record_df = trade.trade_long(symbol, adj_value)
                 if (adj < 0):
+                    print('>>>>>>>>>>>>>>>>>>>>> trade.short ', adj_value)
                     record_df = trade.trade_short(symbol, adj_value)
                 print(record_df)
                 pos_status: dict = self.get_pos_status(symbol)

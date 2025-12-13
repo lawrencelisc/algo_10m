@@ -8,8 +8,8 @@ from pathlib import Path
 
 class AlgoStrategy:
 
-    data_folder_GN = Path('..') / 'data' / 'GrassNodeData'
-    strat_folder = Path('..') / 'data' / 'StratData'
+    data_folder_GN = Path(__file__).parent.parent / 'data' / 'GrassNodeData'
+    strat_folder = Path(__file__).parent.parent / 'data' / 'StratData'
     strat_folder.mkdir(parents=True, exist_ok=True)
 
 

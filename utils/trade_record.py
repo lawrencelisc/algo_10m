@@ -19,7 +19,7 @@ class TradeRecord:
 
     def __init__(self, signal_df: pd.DataFrame):
         self.signal_df = signal_df
-        trade_folder = Path('..') / 'data' / 'Trade'
+        trade_folder = Path(__file__).parent.parent / 'data' / 'Trade'
         trade_folder.mkdir(parents=True, exist_ok=True)
 
         trade_filename: str = 'bybit_trade_record.csv'
@@ -32,7 +32,7 @@ class TradeRecord:
         self.file_path_si = trade_folder / after_signal_filename
         self.file_path_re = trade_folder / return_filename
 
-        signal_folder = Path('..') / 'data' / 'Signal'
+        signal_folder = Path(__file__).parent.parent / 'data' / 'Signal'
         prev_signal_filename = 'prev_signal_table.csv'
         signal_filename = 'signal_table.csv'
         self.prev_signal_path = signal_folder / prev_signal_filename

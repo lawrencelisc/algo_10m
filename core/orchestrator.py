@@ -22,7 +22,7 @@ class DataSourceConfig:
 
     # Creat data folder and sub-folder at initial
     def create_folder(self):
-        base_path = Path('..') / 'data'
+        base_path = Path(__file__).parent.parent / 'data'
         folders = ['GrassNodeData', 'Signal', 'StratData', 'Trade']
         for folder_name in folders:
             folder_path = base_path / folder_name

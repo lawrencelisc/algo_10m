@@ -12,8 +12,8 @@ from datetime import datetime
 class CreateSignal:
     # constant
     strat_list = ['zscore', 'ma_cross', 'bollinger', 'momentum', 'macd_quantile']
-    strat_folder = Path('..') / 'data' / 'StratData'
-    signal_folder = Path('..') / 'data' / 'Signal'
+    strat_folder = Path(__file__).parent.parent / 'data' / 'StratData'
+    signal_folder = Path(__file__).parent.parent / 'data' / 'Signal'
     signal_filename = 'signal_table.csv'
     signal_path = signal_folder / signal_filename
 
@@ -23,33 +23,115 @@ class CreateSignal:
         print(self.strat_df)
 
 
-    # gen signal table if strategy is zscore
+    def _zscore_pos_loop(self, z: np.ndarray, mode: str, enter_thres: float,
+                              exit_thres: float, confirm_bars: int, min_hold: int,
+                              cooldown: int):
+        n = len(z)
+        pos = np.zeros(n, dtype=int)
+
+        bar_pos = 0
+        cooldown_num = 0
+        up_count = 0
+        dn_count = 0
+
+        allow_long = mode in ('long', 'long_short')
+        allow_short = mode in ('short', 'long_short')
+
+        for i in range(n):
+            zi = z[i]
+
+            if np.isnan(zi):
+                pos[i] = pos[i - 1] if i > 0 else 0
+                continue
+
+            prev_pos = pos[i - 1] if i > 0 else 0
+            curr_pos = prev_pos
+
+            # decrement cooldown
+            if cooldown_num > 0:
+                cooldown_num -= 1
+
+            # update bars-in-position counter based on prev_pos
+            if prev_pos != 0:
+                bar_pos += 1
+            else:
+                bar_pos = 0
+
+            can_exit = (bar_pos >= min_hold)
+
+            # During position or cooldown, don't accumulate confirmation counts
+            if prev_pos != 0 or cooldown_num > 0:
+                up_count = 0
+                dn_count = 0
+            else:
+                up_cond = (zi >= +abs(enter_thres))
+                dn_cond = (zi <= -abs(enter_thres))
+                up_count = up_count + 1 if up_cond else 0
+                dn_count = dn_count + 1 if dn_cond else 0
+
+            # exits
+            if prev_pos == +1:
+                if can_exit and zi <= +abs(exit_thres):
+                    curr_pos = 0
+                    if cooldown > 0:
+                        cooldown_num = cooldown
+                    bar_pos = 0
+            elif prev_pos == -1:
+                if can_exit and zi >= -abs(exit_thres):
+                    curr_pos = 0
+                    if cooldown > 0:
+                        cooldown_num = cooldown
+                    bar_pos = 0
+
+            # entries
+            if (curr_pos == 0) and (cooldown_num == 0):
+                if allow_long and up_count >= confirm_bars:
+                    curr_pos = +1
+                    bar_pos = 0
+                    up_count = dn_count = 0
+                elif allow_short and dn_count >= confirm_bars:
+                    curr_pos = -1
+                    bar_pos = 0
+                    up_count = dn_count = 0
+
+            pos[i] = curr_pos
+        return pos
+
+
     def strat_zscore(self, row):
-        signal: int = 0
+        # ================== get param from su_table.csv
         name: str = str(row['name'])
         symbol: str = str(row['symbol'])
         endpt_col: str = str(row['endpt_col'])
         strat: str = str(row['strat'])
         mode: str = str(row['mode'])
         rol: int = int(row['rol'])
-        thres: float = float(row['thres'])
+
+        enter_thres: float = float(row['thres'])
+        exit_thres: float = float(row['exit_thres'])
+        confirm_bars: int = int(row['confirm_bars'])
+        min_hold: int = int(row['min_hold'])
+        cooldown: int = int(row['cooldown'])
+
         strat_filename: str = f'{name}_{endpt_col}_{symbol}.csv'
         file_path = self.strat_folder / strat_filename
-
         df = pd.read_csv(file_path, index_col=0)
         df[endpt_col] = df[endpt_col].astype('float64')
+
+        # ================== strategy calculation
         df['ma'] = df[endpt_col].rolling(rol).mean().astype('float64')
         df['std'] = df[endpt_col].rolling(rol).std().astype('float64')
         df[strat] = ((df[endpt_col] - df['ma']) / df['std']).astype('float64')
 
-        if mode == 'long':
-            df['pos'] = np.select([df[strat] > thres], [1], default=0)
-        elif mode == 'short':
-            df['pos'] = np.select([df[strat] < thres], [-1], default=0)
-        elif mode == 'long_short':
-            df['pos'] = np.select([df[strat] > thres, df[strat] < thres], [1, -1], default=0)
+        z = df[strat].to_numpy(dtype=float)
+
+        # call the loop function
+        pos = self._zscore_pos_loop(z, mode, enter_thres, exit_thres,
+                                         confirm_bars, min_hold, cooldown)
+
+        df['pos'] = pos
         df.to_csv(file_path)
-        signal = df['pos'].iloc[-1]
+        signal = int(df['pos'].iloc[-1])
 
         return signal
 
