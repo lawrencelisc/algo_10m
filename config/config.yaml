@@ -2,6 +2,10 @@ algo_10m_btc:
   BTC_10M_API_KEY: oy5nNF37jhgsfrRZE8
   BTC_10M_SECRET_KEY: K9Qj23Kv9ceovcMtd4MrgIoJ9JbP4D9IPSAg
 
+algo_10m_eth:
+  ETH_10M_API_KEY: 7cdhSfRcPeLmvifXIZ
+  ETH_10M_SECRET_KEY: 8a0zbBmvOm5Nk32ZMp2gQCfWq4edeJ10iMCD
+
 grassnode:
   GN_API: 2wlOd0ApVQgg4SDPqFk2Lq2Btku
 
