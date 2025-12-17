@@ -1,2 +1,6 @@
 date,name,symbol,saved_csv,signal,order_id,t_timestamp,t_datetime,t_type,side,takerOrMaker,price,amount,cost,product_symbol,feeCurrency,fee.cost,fee.rate
-2025-12-11 18:00:00,201_market_price_usd_ohlc,BTC,201_market_price_usd_ohlc_c_BTC.csv,1,5c98e096-5ae2-47fc-9147-928b604cf642,1765476793433,2025-12-11T18:13:13.433Z,market,buy,taker,90345.0,0.001,90.345,BTCUSDT,USDT,0.04968975,0.00055
+2025-12-17 15:00:00,201_market_price_usd_ohlc,BTC,201_market_price_usd_ohlc_c_BTC.csv,1,e98a6e19-c24b-4f0f-9b5f-df1d9df558e4,1765983692213,2025-12-17T15:01:32.213Z,market,buy,taker,89490.0,0.01,894.9,BTCUSDT,USDT,0.492195,0.00055
+2025-12-17 15:50:00,202_market_price_usd_ohlc,ETH,202_market_price_usd_ohlc_c_ETH.csv,0,7ccf245b-9c75-4857-a540-f8c498e7377a,1765986684103,2025-12-17T15:51:24.103Z,market,sell,taker,2916.97,1.0,2916.9700000000003,ETHUSDT,USDT,1.6043335,0.00055
+2025-12-17 16:00:00,201_market_price_usd_ohlc,BTC,201_market_price_usd_ohlc_c_BTC.csv,0,f4891cf9-6270-4a40-b23d-ca32e09c2078,1765987281930,2025-12-17T16:01:21.930Z,market,sell,taker,87372.8,0.01,873.728,BTCUSDT,USDT,0.4805504,0.00055
+2025-12-17 16:20:00,202_market_price_usd_ohlc,ETH,202_market_price_usd_ohlc_c_ETH.csv,-1,33d89ff3-d860-444e-8c86-9f786243a456,1765988485281,2025-12-17T16:21:25.281Z,market,sell,taker,2854.41,1.0,2854.41,ETHUSDT,USDT,1.5699255,0.00055
+2025-12-17 16:40:00,201_market_price_usd_ohlc,BTC,201_market_price_usd_ohlc_c_BTC.csv,-1,77013cec-2e68-4691-ad04-048651afc8f8,1765989681975,2025-12-17T16:41:21.975Z,market,sell,taker,86342.5,0.01,863.425,BTCUSDT,USDT,0.47488375,0.00055

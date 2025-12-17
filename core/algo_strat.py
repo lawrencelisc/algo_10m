@@ -30,7 +30,7 @@ class AlgoStrategy:
             endpt_col: str = str(row['endpt_col'])
             strat: str = str(row['strat'])
 
-            filename: str = f'{name}_{symbol}.csv'
+            filename: str = f'{name}_{symbol}_a.csv'
             filename_endpt: str = f'{name}_{endpt_col}_{symbol}.csv'
             file_path = self.data_folder_GN / filename
             file_path_endpt = self.strat_folder / filename_endpt

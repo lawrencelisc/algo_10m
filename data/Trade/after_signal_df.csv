@@ -1,2 +1,6 @@
 date,date_s1,name,symbol,saved_csv,signal,signal_s1,signal_plus
-2025-12-11 18:00:00,2025-12-11 18:00:00,201_market_price_usd_ohlc,BTC,201_market_price_usd_ohlc_c_BTC.csv,1,0,01
+2025-12-17 15:00:00,2025-12-17 15:00:00,201_market_price_usd_ohlc,BTC,201_market_price_usd_ohlc_c_BTC.csv,1,0,01
+2025-12-17 15:50:00,2025-12-17 15:40:00,202_market_price_usd_ohlc,ETH,202_market_price_usd_ohlc_c_ETH.csv,0,1,10
+2025-12-17 16:00:00,2025-12-17 15:50:00,201_market_price_usd_ohlc,BTC,201_market_price_usd_ohlc_c_BTC.csv,0,1,10
+2025-12-17 16:20:00,2025-12-17 16:10:00,202_market_price_usd_ohlc,ETH,202_market_price_usd_ohlc_c_ETH.csv,-1,0,0-1
+2025-12-17 16:40:00,2025-12-17 16:30:00,201_market_price_usd_ohlc,BTC,201_market_price_usd_ohlc_c_BTC.csv,-1,0,0-1

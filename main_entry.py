@@ -130,7 +130,7 @@ def scheduler(xx_min, BET_SIZE):
 # main to start
 if __name__ == '__main__':
     BET_SIZE = {'BTC': 0.01, 'ETH': 1}
-    xx_min = {3, 13, 23, 33, 43, 53}
+    xx_min = {1, 11, 21, 31, 41, 51}
 
     utc_now = dt.datetime.now(dt.UTC)
     dt_str = utc_now.strftime('%Y-%m-%d %H:%M:%S')
