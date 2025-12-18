@@ -39,13 +39,13 @@ def algo_seq(BET_SIZE):
     signal_df = gen_signal.split_sub()
     logger.info('Generated {} signals', len(signal_df))
 
-    # # 5. Execute signals with per-symbol bet sizes
-    # signal_exec = SignalExecution(signal_df, BET_SIZE)
-    # signal_exec.create_market_order()
-    # logger.info('Executed market orders with bet_size mapping: {}', BET_SIZE)
-    #
-    # end_time = dt.datetime.now(dt.UTC)
-    # logger.info('algo_seq finished at (UTC) {} (duration: {})', end_time, end_time - start_time)
+    # 5. Execute signals with per-symbol bet sizes
+    signal_exec = SignalExecution(signal_df, BET_SIZE)
+    signal_exec.create_market_order()
+    logger.info('Executed market orders with bet_size mapping: {}', BET_SIZE)
+
+    end_time = dt.datetime.now(dt.UTC)
+    logger.info('algo_seq finished at (UTC) {} (duration: {})', end_time, end_time - start_time)
 
 
 def next_scheduler(xx_min):
