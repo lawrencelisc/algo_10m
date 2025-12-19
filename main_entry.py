@@ -128,7 +128,7 @@ def scheduler(xx_min, BET_SIZE):
 
 # main to start
 if __name__ == '__main__':
-    BET_SIZE = {'BTC': 0.02, 'ETH': 1}
+    BET_SIZE = {'BTC': 0.001, 'ETH': 0.01}
     xx_min = {1, 11, 21, 31, 41, 51}
 
     utc_now = dt.datetime.now(dt.UTC)
